@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+- `npm test` runs `check:personal`, which refuses a home-directory path, a host name or a full public key in a tracked file.
+- `npm run smoke`: a consumer smoke test that installs the tree into a scratch app and imports the entry point; CI runs it.
+- README: the full-SHA install line and the npm 11 `allowScripts` note.
+
 ## 0.1.0
 
 - `audibleLink`: Audible's app link for any book, optionally at a position; no `narration_speed` unless a speed is given.

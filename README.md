@@ -13,8 +13,20 @@ No UI and no DOM; it runs in a browser, in Node 20+ and in a test. Tests never t
 From GitHub, at a pinned commit (the build runs on install):
 
 ```sh
-npm install github:Jonathan-A-White/audible-kit#<commit>
+npm install github:Jonathan-A-White/audible-kit#ac2224ca7dedccae47df7a33f7a71136e688cb2e
 ```
+
+Pin a full commit SHA, never a branch; the one above is the commit the first apps use.
+
+npm 11 warns that `audible-kit` has an install script (`prepare`, the build) not yet covered by
+`allowScripts`. Allow it with `npm install-scripts approve audible-kit`, which adds an entry to your
+`package.json` keyed by the install line, for example:
+
+```json
+"allowScripts": { "github:Jonathan-A-White/audible-kit#ac2224ca7dedccae47df7a33f7a71136e688cb2e": true }
+```
+
+Pinning the full SHA in the install line and in `allowScripts` installs the same code.
 
 ```ts
 import { audibleLink, fetchChapterStarts, wordOfPromiseStart } from 'audible-kit';
@@ -74,6 +86,10 @@ To rebuild the data from Audible's catalogue (needs the network): `npm run audib
 npm ci
 npm run lint && npm run typecheck && npm test && npm run build
 ```
+
+`npm test` also runs `npm run check:personal`, which fails when a tracked file holds a home-directory path, a host name or a full public key (the repo is public).
+
+`npm run smoke` is the consumer smoke test: it installs the working tree the way an app does (`npm install git+file://<a fresh clone>`) into a scratch folder and checks that the build ran and that `audibleLink`, `chapterStarts` and the Word of Promise data import and work. It needs the network or a warm npm cache, so CI runs it as its own step and `npm test` does not.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) and [CHANGELOG.md](CHANGELOG.md).
 

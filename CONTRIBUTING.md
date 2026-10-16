@@ -12,7 +12,7 @@ npm test
 npm run build
 ```
 
-All four must pass; CI runs them on every pull request. Tests never use the network: use a fake `fetch` and the saved copy of Audible's answer in `tests/fixtures/`.
+All four must pass; CI runs them on every pull request, followed by `npm run smoke` (installs the tree into a scratch app; needs the network). `npm test` includes `check:personal`, which refuses a home-directory path, a host name or a full public key in any tracked file. Tests never use the network: use a fake `fetch` and the saved copy of Audible's answer in `tests/fixtures/`.
 
 ## Rebuilding the Word of Promise data
 
