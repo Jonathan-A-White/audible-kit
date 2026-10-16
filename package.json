@@ -29,8 +29,10 @@
     "prepare": "npm run build",
     "lint": "eslint .",
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "test": "vitest run",
-    "audible:build": "tsx scripts/build-word-of-promise.ts"
+    "test": "npm run check:personal && vitest run",
+    "audible:build": "tsx scripts/build-word-of-promise.ts",
+    "check:personal": "node scripts/check-personal.mjs",
+    "smoke": "node scripts/consumer-smoke.mjs"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
